@@ -1,0 +1,59 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import javax.swing.*;
+public class Pantalla extends JFrame implements ActionListener{
+	
+	static JTextArea pant;
+	JPanel panel;
+	JButton botonIniciar;
+	 
+	public Pantalla(){
+		super("Servidor Control Remoto PC By Saul Blanco");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		
+		
+		panel= new JPanel();
+		panel.setLayout(new FlowLayout());
+		
+		pant= new JTextArea(35,65);
+		pant.setEditable(false);
+		//panel.add(pant);
+		pant.add(panel);
+	//	panel.add(botonIniciar);
+		setSize(750,500);
+		
+		//panel.setSize(500,500);
+		
+		add(panel);
+		setVisible(true);
+		
+	}
+	
+	
+	public void setText(String texto){
+		pant.append("\n" + texto);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource()==botonIniciar){
+			
+			Servidor.IniciarServidor();
+		}
+	}
+	
+
+}

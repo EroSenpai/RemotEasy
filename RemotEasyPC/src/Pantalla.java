@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -10,26 +11,34 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.*;
-public class Pantalla extends JFrame{
+public class Pantalla extends JFrame implements ActionListener{
 	
+	
+	private static final long serialVersionUID = 1L;
 	static JTextArea pant;
 	JPanel panel;
+	JButton botonIniciar;
 	 
 	public Pantalla(){
-		super("Servidor Control Remoto PC By Saul Blanco");
+		super("RemotEasy");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(new FlowLayout());
 		setLocationRelativeTo(null);
 		setResizable(false);
-		
-		
-		pant= new JTextArea(35,65);
-		pant.setEditable(false);
-		add(pant);
-		
 		setSize(750,500);
+		
 		panel= new JPanel();
-		//panel.setSize(500,500);
+		pant= new JTextArea(35,55);
+		pant.setEditable(false);
+		botonIniciar = new JButton("Arrancar");
+		
+		panel.add(pant);
+		panel.add(botonIniciar);
+		botonIniciar.addActionListener(this);
+		
+		
+		
+		
+	
 		
 		add(panel);
 		setVisible(true);
@@ -39,6 +48,16 @@ public class Pantalla extends JFrame{
 	
 	public void setText(String texto){
 		pant.append("\n" + texto);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource()==botonIniciar){
+			
+			Servidor.IniciarServidor();
+		}
 	}
 	
 
